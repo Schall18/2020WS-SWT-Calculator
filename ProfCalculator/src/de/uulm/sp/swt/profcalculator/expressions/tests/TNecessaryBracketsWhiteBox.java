@@ -8,6 +8,7 @@ import de.uulm.sp.swt.profcalculator.expressions.Addition;
 import de.uulm.sp.swt.profcalculator.expressions.Expression;
 import de.uulm.sp.swt.profcalculator.expressions.Multiplication;
 import de.uulm.sp.swt.profcalculator.expressions.NecessaryBrackets;
+import de.uulm.sp.swt.profcalculator.expressions.Subtraction;
 import de.uulm.sp.swt.profcalculator.expressions.Value;
 
 class TNecessaryBracketsWhiteBox {
@@ -31,12 +32,21 @@ class TNecessaryBracketsWhiteBox {
 	}
 
 	@Test
-	void testAdditionWithinAddition() {
-		Expression child = new Addition(new Value(1), new Value(2));
+	void testMultiplicationnWithinMultiplication() {
+		Expression child = new Multiplication(new Value(1), new Value(2));
 		Expression brackets = new NecessaryBrackets(child);
-		Expression parent = new Addition(brackets, new Value(3));
+		Expression parent = new Multiplication(brackets, new Value(3));
 		String result = brackets.toString(parent);
 		assertEquals(child.toString(), result);
 	}
-
+	
+	
+	@Test
+	void testSubtractionWithinMultiplication() {
+		Expression child = new Subtraction(new Value(1), new Value(2));
+		Expression brackets = new NecessaryBrackets(child);
+		Expression parent = new Multiplication(brackets, new Value(3));
+		String result = brackets.toString(parent);
+		assertEquals("(" + child + ")", result);
+	}
 }
