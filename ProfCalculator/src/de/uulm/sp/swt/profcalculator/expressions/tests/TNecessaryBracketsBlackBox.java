@@ -8,6 +8,7 @@ import de.uulm.sp.swt.profcalculator.expressions.Addition;
 import de.uulm.sp.swt.profcalculator.expressions.Expression;
 import de.uulm.sp.swt.profcalculator.expressions.Multiplication;
 import de.uulm.sp.swt.profcalculator.expressions.NecessaryBrackets;
+import de.uulm.sp.swt.profcalculator.expressions.Subtraction;
 import de.uulm.sp.swt.profcalculator.expressions.Value;
 
 class TNecessaryBracketsBlackBox {
@@ -18,6 +19,8 @@ class TNecessaryBracketsBlackBox {
 	
 	Expression mult =  new NecessaryBrackets(new Multiplication(value, value));
 	
+	Expression sub = new NecessaryBrackets(new Subtraction(value, value));
+	
 	
 	@Test
 	void testNoBrackets() {
@@ -27,7 +30,7 @@ class TNecessaryBracketsBlackBox {
 	
 	@Test
 	void testBracketsLeft() {
-		assertEquals("(1 + 1) * 1",new Multiplication(add,value).toString());
+		assertEquals("(1 - 1) * 1",new Multiplication(sub,value).toString());
 	}
 	
 	@Test
@@ -37,7 +40,18 @@ class TNecessaryBracketsBlackBox {
 	
 	@Test
 	void testBracketsLeftAndRight() {
-		assertEquals("(1 + 1) * (1 + 1)",new Multiplication(add,add).toString());
+		assertEquals("(1 - 1) * (1 + 1)",new Multiplication(sub,add).toString());
+	}
+	
+	
+	@Test
+	void testBracketsRightSubtraction() {
+		assertEquals("1 - (1 * 1)", new Subtraction(value, mult));
+	}
+	
+	@Test
+	void testNoBracketsSubtractionswithingAdditions() {
+		assertEquals("1 - 1 + 1 - 1", new Addition(sub,sub).toString());
 	}
 
 }

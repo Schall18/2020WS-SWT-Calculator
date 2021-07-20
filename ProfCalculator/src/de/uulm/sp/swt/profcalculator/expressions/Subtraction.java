@@ -18,7 +18,7 @@ public class Subtraction extends Expression{
 	@Override
 	public String toString(Expression parent) {
 		// TODO Auto-generated method stub
-		return left.toString(this) + "-" + right.toString(this);
+		return left.toString(this) + " - " + right.toString(this);
 	}
 
 }
