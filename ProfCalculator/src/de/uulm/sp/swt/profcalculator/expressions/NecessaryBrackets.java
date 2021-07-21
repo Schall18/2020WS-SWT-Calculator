@@ -14,6 +14,9 @@ public class NecessaryBrackets extends Expression {
 		if (parent instanceof Multiplication && (expression instanceof Addition || expression instanceof Subtraction)) {
 			childString = "(" + childString + ")";
 		}
+		if (parent instanceof Subtraction && ((Subtraction) parent).right == this && (expression instanceof Addition || expression instanceof Subtraction)) {
+			childString = "(" + childString + ")";
+		}
 		return childString;
 	}
 
