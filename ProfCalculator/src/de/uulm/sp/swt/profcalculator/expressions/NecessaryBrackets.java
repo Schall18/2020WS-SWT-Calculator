@@ -9,12 +9,12 @@ public class NecessaryBrackets extends Expression {
 	}
 	
 	@Override
-	public String toString(Expression parent) {
-		String childString = expression.toString(parent);
+	public String toString(Expression parent, Kind kind) {
+		String childString = expression.toString(parent, Kind.LEFT);
 		if (parent instanceof Multiplication && (expression instanceof Addition || expression instanceof Subtraction)) {
 			childString = "(" + childString + ")";
 		}
-		if (parent instanceof Subtraction && ((Subtraction) parent).right == this && (expression instanceof Addition || expression instanceof Subtraction)) {
+		if (parent instanceof Subtraction && (kind == Kind.RIGHT && (expression instanceof Addition || expression instanceof Subtraction))) {
 			childString = "(" + childString + ")";
 		}
 		return childString;

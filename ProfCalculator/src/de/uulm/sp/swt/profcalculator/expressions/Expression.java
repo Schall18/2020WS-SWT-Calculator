@@ -24,10 +24,10 @@ public abstract class Expression {
 	 * @param parent the expression containing this or null if root expression
 	 * @return a string representation of the expression
 	 */
-	public abstract String toString(Expression parent);
+	public abstract String toString(Expression parent, Kind kind);
 
 	public String toString() {
-		return toString(null);
+		return toString(null, Kind.LEFT);
 	}
 
 	public String computeEquation() {

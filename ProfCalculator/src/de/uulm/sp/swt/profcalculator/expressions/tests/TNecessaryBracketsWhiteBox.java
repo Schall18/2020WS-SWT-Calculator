@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+
 import de.uulm.sp.swt.profcalculator.expressions.Addition;
 import de.uulm.sp.swt.profcalculator.expressions.Expression;
+import de.uulm.sp.swt.profcalculator.expressions.Kind;
 import de.uulm.sp.swt.profcalculator.expressions.Multiplication;
 import de.uulm.sp.swt.profcalculator.expressions.NecessaryBrackets;
 import de.uulm.sp.swt.profcalculator.expressions.Subtraction;
@@ -18,7 +20,7 @@ class TNecessaryBracketsWhiteBox {
 		Expression child = new Addition(new Value(1), new Value(2));
 		Expression brackets = new NecessaryBrackets(child);
 		Expression parent = new Multiplication(brackets, new Value(3));
-		String result = brackets.toString(parent);
+		String result = brackets.toString(parent, Kind.LEFT);
 		assertEquals("(" + child + ")", result);
 	}
 
@@ -27,7 +29,7 @@ class TNecessaryBracketsWhiteBox {
 		Expression child = new Multiplication(new Value(1), new Value(2));
 		Expression brackets = new NecessaryBrackets(child);
 		Expression parent = new Addition(brackets, new Value(3));
-		String result = brackets.toString(parent);
+		String result = brackets.toString(parent, Kind.LEFT);
 		assertEquals(child.toString(), result);
 	}
 
@@ -36,7 +38,7 @@ class TNecessaryBracketsWhiteBox {
 		Expression child = new Multiplication(new Value(1), new Value(2));
 		Expression brackets = new NecessaryBrackets(child);
 		Expression parent = new Multiplication(brackets, new Value(3));
-		String result = brackets.toString(parent);
+		String result = brackets.toString(parent, Kind.LEFT);
 		assertEquals(child.toString(), result);
 	}
 	
@@ -46,7 +48,7 @@ class TNecessaryBracketsWhiteBox {
 		Expression child = new Subtraction(new Value(1), new Value(2));
 		Expression brackets = new NecessaryBrackets(child);
 		Expression parent = new Multiplication(brackets, new Value(3));
-		String result = brackets.toString(parent);
+		String result = brackets.toString(parent, Kind.LEFT);
 		assertEquals("(" + child + ")", result);
 	}
 }

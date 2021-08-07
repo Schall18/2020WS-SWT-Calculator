@@ -10,8 +10,8 @@ public class Multiplication extends Expression {
 		this.right = right;
 	}
 
-	public String toString(Expression parent) {
-		return left.toString(this) + " * " + right.toString(this);
+	public String toString(Expression parent, Kind kind) {
+		return left.toString(this, Kind.LEFT) + " * " + right.toString(this, Kind.RIGHT);
 	}
 
 	public int evaluate() {

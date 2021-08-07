@@ -16,7 +16,6 @@ class TNecessaryBracketsBlackBox {
 	Expression value = new NecessaryBrackets(new Value(1));
 	
 	Expression add =  new NecessaryBrackets(new Addition(value, value));
-	Expression add2 =  new NecessaryBrackets(new Addition(value, value));
 	
 	Expression mult =  new NecessaryBrackets(new Multiplication(value, value));
 	
@@ -53,7 +52,7 @@ class TNecessaryBracketsBlackBox {
 	
 	@Test
 	void testBracketsRightSubtraction() {
-		assertEquals("1 + 1 - (1 + 1)", new Subtraction(add, add2).toString());
+		assertEquals("1 + 1 - (1 + 1)", new Subtraction(add, add).toString());
 	}
 	
 	@Test
